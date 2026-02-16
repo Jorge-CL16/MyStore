@@ -1,32 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyStore.Context;
-using MyStore.Entities;
-using MyStore.Models;
 using Microsoft.EntityFrameworkCore;
+using MyStore.Services;
 
 namespace MyStore.Controllers
 {
     public class CategoryController : Controller
     {
 
-        private readonly AppDbContext context;
+        private readonly CategoryService categoryService;
 
-        public CategoryController(AppDbContext context)
+        public CategoryController(CategoryService categoryService)
         {
-            this.context = context;
+            this.categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categories = await context.Category
-                .AsNoTracking()
-                .Select(c => new CategoryVM
-                {
-                    CategoryId = c.CategoryId,
-                    Name = c.Name
-                })
-                .ToListAsync();
-
+            var categories = await categoryService.GetAllAsync();
             return View(categories);
         }
 
