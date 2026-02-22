@@ -28,6 +28,14 @@ namespace MyStore.Services
 
             return categoriesVM;
         }
-    }
 
+        public async Task AddAsync(CategoryVM viewModel)
+        {
+            var entity = new Category
+            {
+                Name = viewModel.Name,
+            };
+            await _categoryRepository.AddAsync(entity);
+        }
+    }
 }

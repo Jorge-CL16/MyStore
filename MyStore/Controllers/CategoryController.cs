@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyStore.Models;
 using MyStore.Services;
 
 namespace MyStore.Controllers
@@ -20,5 +21,21 @@ namespace MyStore.Controllers
             return View(categories);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddEdit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEdit(CategoryVM entityVM)
+        {
+            ViewBag.message = null;
+            if (!ModelState.IsValid) return View(entityVM);
+
+            await categoryService.AddAsync(entityVM);
+            ViewBag.message = "Categoria creada";
+            return View();
+        }
     }
 }
