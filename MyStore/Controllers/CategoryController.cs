@@ -22,9 +22,10 @@ namespace MyStore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddEdit()
+        public async Task<IActionResult> AddEdit(int id)
         {
-            return View();
+            var categoryVM = await categoryService.GetByIdAsync(id);
+            return View(categoryVM);
         }
 
         [HttpPost]
