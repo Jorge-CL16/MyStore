@@ -23,9 +23,17 @@
                 <td>@item.Name</td>
                 <td style="width:120px">
                     <a href="/Category/AddEdit/@item.CategoryId" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen"></i></a>
-                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteItem(@item.CategoryId)"><i class="fa-solid fa-trash-can"></i></button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<script>
+    function deleteItem (id) {
+        if(confirm("Are you sure to delete?")){
+            window.location.href = '@Url.Action("Delete","Category")' + '?id=' + id;
+        }
+    }
+</script>

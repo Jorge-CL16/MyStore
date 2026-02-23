@@ -62,5 +62,13 @@ namespace MyStore.Services
             await _categoryRepository.EditAsync(entity);
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var category = await _categoryRepository.GetByIdAsync(id);
+            await _categoryRepository.DeleteAsync(category!);
+
+
+        }
+
     }
 }
