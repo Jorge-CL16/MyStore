@@ -30,10 +30,12 @@
     </tbody>
 </table>
 
-<script>
-    function deleteItem (id) {
-        if(confirm("Are you sure to delete?")){
-            window.location.href = '@Url.Action("Delete","Category")' + '?id=' + id;
+@section Scripts{
+    <script>
+        function deleteItem (id) {
+            if(confirm("Are you sure to delete?")){
+                window.location.href = '@Url.Action("Delete", "Category")' + '?id=' + id;
+            }
         }
-    }
-</script>
+    </script>
+}
