@@ -34,9 +34,21 @@ namespace MyStore.Controllers
             ViewBag.message = null;
             if (!ModelState.IsValid) return View(entityVM);
 
-            await categoryService.AddAsync(entityVM);
-            ViewBag.message = "Categoria creada";
-            return View();
+            if(entityVM.CategoryId == 0)
+            {
+                await categoryService.AddAsync(entityVM);
+                ModelState.Clear();
+                entityVM = new CategoryVM();
+                ViewBag.message = "Created category";
+
+            }
+            else
+            {
+                await categoryService.EditAsync(entityVM);
+                ViewBag.message = "Edited Category";
+            }
+
+            return View(entityVM);
         }
     }
 }
